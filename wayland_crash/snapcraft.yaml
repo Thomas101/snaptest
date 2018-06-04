@@ -1,0 +1,57 @@
+name: test
+version: 1.0.0
+summary: My summary
+description: My description
+confinement: strict
+grade: stable
+architectures:
+  - amd64
+apps:
+  test:
+    command: env TMPDIR=$XDG_RUNTIME_DIR XDG_CURRENT_DESKTOP=Unity desktop-launch $SNAP/test > /dev/null
+    desktop: test.desktop
+    plugs:
+      - home
+      - camera
+      - browser-support
+      - network
+      - network-bind
+      - gsettings
+      - password-manager-service
+      - pulseaudio
+      - opengl
+      - desktop
+      - unity7
+      - x11
+      - desktop-legacy
+      - screen-inhibit-control
+      - upower-observe
+      - cups-control
+      - alsa
+      - avahi-observe
+parts:
+  app:
+    plugin: dump
+    build-packages:
+      - execstack
+    prepare:
+      execstack --clear-execstack test
+    stage-packages:
+      - libnss3
+      - libnotify4
+      - libappindicator1
+      - libxtst6
+      - libxss1
+      - libpcre3
+      - fontconfig-config
+      - libpulse0
+      - gconf2
+      - libasound2
+      - pulseaudio
+      - libgconf-2-4
+      - libsecret-1-0
+      - libnspr4
+    source: ./test-linux-x64
+    after:
+      - desktop-gtk3
+

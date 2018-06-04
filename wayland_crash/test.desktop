@@ -1,0 +1,8 @@
+[Desktop Entry]
+Version=1.0
+Name=Test
+Comment=Info
+Exec=test --mailto=%u > /dev/null
+Terminal=false
+Type=Application
+
